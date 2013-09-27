@@ -2,6 +2,7 @@
 var util = require('util');
 var path = require('path');
 var yeoman = require('yeoman-generator');
+var _ = require('underscore.string');
 
 var SillypogGenerator = module.exports = function SillypogGenerator(args, options, config) {
   yeoman.generators.Base.apply(this, arguments);
@@ -44,7 +45,7 @@ SillypogGenerator.prototype.app = function app() {
   this.template('Gruntfile.js', 'Gruntfile.js');
   this.template('_index.html', 'src/index.html');
 
-  this.copy('main.scss', 'src/scss/'+this.siteName+'.scss');
+  this.copy('main.scss', 'src/scss/'+_.slugify(this.siteName)+'.scss');
 };
 
 SillypogGenerator.prototype.ruby = function ruby() {

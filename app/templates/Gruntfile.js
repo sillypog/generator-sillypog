@@ -17,7 +17,7 @@ module.exports = function(grunt){
 		},
 		sass: {
 			dist: {
-				files: { 'build/css/<%%= pkg.name %>.css': 'src/scss/<%%= pkg.name %>.scss'}
+				files: { 'build/css/<%%= _.slugify(pkg.name) %>.css': 'src/scss/<%%= _.slugify(pkg.name) %>.scss'}
 			}
 		},
 		/*concat: {
