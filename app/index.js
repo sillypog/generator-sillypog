@@ -3,7 +3,6 @@ var util = require('util');
 var path = require('path');
 var yeoman = require('yeoman-generator');
 
-
 var SillypogGenerator = module.exports = function SillypogGenerator(args, options, config) {
   yeoman.generators.Base.apply(this, arguments);
 
@@ -16,35 +15,46 @@ var SillypogGenerator = module.exports = function SillypogGenerator(args, option
 
 util.inherits(SillypogGenerator, yeoman.generators.Base);
 
+SillypogGenerator.prototype.greet = function greet() {
+   console.log(this.yeoman);
+}
+
 SillypogGenerator.prototype.askFor = function askFor() {
   var cb = this.async();
 
-  // have Yeoman greet the user.
-  console.log(this.yeoman);
-
   var prompts = [{
-    type: 'confirm',
-    name: 'someOption',
-    message: 'Would you like to enable this option?',
-    default: true
+    name: 'siteName',
+    message: 'What would you like to call your site?',
   }];
 
   this.prompt(prompts, function (props) {
-    this.someOption = props.someOption;
+    this.siteName = props.siteName;
 
     cb();
   }.bind(this));
 };
 
 SillypogGenerator.prototype.app = function app() {
-  this.mkdir('app');
-  this.mkdir('app/templates');
+  this.mkdir('src');
+  this.mkdir('src/scss');
+  this.mkdir('build');
 
-  this.copy('_package.json', 'package.json');
-  this.copy('_bower.json', 'bower.json');
+  this.template('_package.json', 'package.json');
+  this.template('_bower.json', 'bower.json');
+  this.template('Gruntfile.js', 'Gruntfile.js');
+  this.template('_index.html', 'src/index.html');
+
+  this.copy('main.scss', 'src/scss/'+this.siteName+'.scss');
 };
 
-SillypogGenerator.prototype.projectfiles = function projectfiles() {
-  this.copy('editorconfig', '.editorconfig');
-  this.copy('jshintrc', '.jshintrc');
-};
+SillypogGenerator.prototype.ruby = function ruby() {
+  this.copy('Gemfile', 'Gemfile');
+  this.copy('.ruby-version', '.ruby-version');
+  this.template('.ruby-gemset', '.ruby-gemset');
+}
+
+/*SillypogGenerator.prototype.runtime = function runtime() {
+  this.copy('bowerrc', '.bowerrc');
+  this.copy('gitignore', '.gitignore');
+  this.copy('jshintrc', 'jshintrc');
+};*/

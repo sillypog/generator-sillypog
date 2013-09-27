@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title><%= _.capitalize(siteName) %></title>
+
+	<!-- Include development or production CSS, depending on build -->
+	<link rel="stylesheet" href="css/<%= _.slugify(siteName) %>.css"
+
+</head>
+
+<body>
+
+	<!-- Popular libraries from Google CDN -->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="jquery.js"><\/script>'); // Fallback if CDN is down.</script>
+
+	
+<!-- @if NODE_ENV == 'DEVELOPMENT' -->
+	<!-- Bower library includes -->
+
+	<!-- Site specific javascript. -->
+
+<!-- @endif -->
+
+<!-- @if NODE_ENV == 'PRODUCTION' -->
+	<!-- Bower library includes -->
+
+	<!-- Site specific javascript. -->
+	<script src="js/<%= siteName %>.js"></script>
+<!-- @endif -->
+</body>
+</html>
