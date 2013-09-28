@@ -20,25 +20,39 @@ module.exports = function(grunt){
 				files: { 'build/css/<%%= _.slugify(pkg.name) %>.css': 'src/scss/<%%= _.slugify(pkg.name) %>.scss'}
 			}
 		},
-		/*concat: {
+		clean: ['build'],
+		copy: {
+			main: {
+				files: [
+					{src: 'bower_components/jquery/jquery.min.js', dest: 'build/js/jquery.min.js'},
+					{cwd: 'src/assets', src:['**/*.*'], dest:'build/assets', expand:true}
+				]
+			},
+			dev: {
+				files: [
+					{ cwd: 'src/js', src: ['*.js'], dest: 'build/js', filter: 'isFile', expand:true}
+				]
+			}
+		},
+		concat: {
 	      js: {
 	      	options: {
 	        	separator: ';\n\n'
 	      	},
 	        src: ['src/js/*.js'],
-	        dest: 'bin-dev/<%%= pkg.name %>.js'
+	        dest: 'build/js/<%%= _.slugify(pkg.name) %>.js'
 	      }
 	    },
 	    uglify: {
 	      options: {
-	        banner: '//! <%%= pkg.name %> <%%= grunt.template.today("dd-mm-yyyy") %> \n'
+	        banner: '//! <%%= _.slugify(pkg.name) %> <%%= grunt.template.today("dd-mm-yyyy") %> \n'
 	      },
 	      dist: {
 	        files: {
-	          'build/<%%= pkg.name %>.js': ['<%%= concat.js.dest %>']
+	          '<%%= concat.js.dest %>': ['<%%= concat.js.dest %>']
 	        }
 	      }
-	    },*/
+	    },
 	    watch: {
 	    	files: ['src/**'],
 	    	tasks: ['dev']
@@ -51,21 +65,17 @@ module.exports = function(grunt){
 	    			hostname: ''
 	    		}
 	    	} 
-	    }*/
+	    }
 	});
 
 	// load all grunt tasks
 	require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
-	// Custom tasks
-	grunt.registerTask('log','Output message when build complete', function(){
-		grunt.log.writeln('Build complete');
-	})
-
 	// Default task(s).
-	grunt.registerTask('build', ['preprocess', 'log']);
+	grunt.registerTask('common', ['preprocess', 'copy:main']);
 
-	grunt.registerTask('dev', ['env:dev', 'build']);
-	grunt.registerTask('prod', ['env:prod', 'build']);
+	grunt.registerTask('dev', ['env:dev', 'copy:dev', 'common']);
+	grunt.registerTask('prod', ['env:prod', 'clean', 'common', 'concat', 'uglify']);
+
 	grunt.registerTask('default', ['dev']);
 };

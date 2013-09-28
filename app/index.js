@@ -38,6 +38,8 @@ SillypogGenerator.prototype.askFor = function askFor() {
 SillypogGenerator.prototype.app = function app() {
   this.mkdir('src');
   this.mkdir('src/scss');
+  this.mkdir('src/js');
+  this.mkdir('src/assets');
   this.mkdir('build');
 
   this.template('_package.json', 'package.json');
