@@ -4,11 +4,13 @@
 	<title><%= _.capitalize(siteName) %></title>
 
 	<!-- Include development or production CSS, depending on build -->
-	<link rel="stylesheet" href="css/<%= _.slugify(siteName) %>.css"
+	<link rel="stylesheet" href="css/<%= _.slugify(siteName) %>.css">
 
 </head>
 
 <body>
+
+	<h1><%= _.capitalize(siteName) %></h1>
 
 	<!-- Popular libraries from Google CDN -->
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
