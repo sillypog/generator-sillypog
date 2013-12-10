@@ -50,6 +50,7 @@ SillypogGenerator.prototype.app = function app() {
   
   this.copy('common.js.pkg', 'src/asset_packages/js/common.js.pkg');
   this.copy('main.scss', 'src/scss/'+_.slugify(this.siteName)+'.scss');
+  this.copy('favicon.ico', 'src/favicon.ico');
 };
 
 SillypogGenerator.prototype.ruby = function ruby() {

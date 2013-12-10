@@ -19,7 +19,8 @@ module.exports = function(grunt){
 			main: {
 				files: [
 					{cwd: 'src/assets', src:['**/*.*'], dest:'build/assets', expand:true},
-					{src:'bower_components/jquery/jquery.min.js', dest:'build/jquery.min.js'}
+					{src:'bower_components/jquery/jquery.min.js', dest:'build/jquery.min.js'},
+					{src:'src/favicon.ico', dest:'build/favicon.ico'}
 				]
 			}
 		},
