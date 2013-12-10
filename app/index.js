@@ -60,7 +60,6 @@ SillypogGenerator.prototype.ruby = function ruby() {
 }
 
 SillypogGenerator.prototype.runtime = function runtime() {
-  //this.copy('bowerrc', '.bowerrc');
   this.copy('gitignore', '.gitignore');
-  //this.copy('jshintrc', 'jshintrc');
+  this.copy('jshintrc', '.jshintrc');
 };

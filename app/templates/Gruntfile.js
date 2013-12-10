@@ -9,6 +9,17 @@ module.exports = function(grunt){
 			dev: { NODE_ENV: 'DEVELOPMENT'},
 			prod: { NODE_ENV: 'PRODUCTION'}
 		},
+		jshint: {
+			all: [
+				'package.json',
+				'Gruntfile.js',
+				'src/**/*.js'
+			],
+			options: {
+				jshintrc: '.jshintrc',
+				reporter: require('jshint-stylish')
+			}
+		},
 		sass: {
 			dist: {
 				files: { 'build/css/<%%= _.slugify(pkg.name) %>.css': 'src/scss/<%%= _.slugify(pkg.name) %>.scss'}
@@ -35,20 +46,20 @@ module.exports = function(grunt){
 				]
 			}
 		},
-	    watch: {
-	    	files: ['src/**'],
-	    	tasks: ['dev']
-	    },
-	    connect: {
-	    	server: {
-	    		options: {
-	    			port: 9001,
-	    			keepalive: true,
-	    			hostname: '',
-	    			base: 'build'
-	    		}
-	    	} 
-	    }
+		watch: {
+			files: ['src/**'],
+			tasks: ['dev']
+		},
+		connect: {
+			server: {
+				options: {
+					port: 9001,
+					keepalive: true,
+					hostname: '',
+					base: 'build'
+				}
+			} 
+		}
 	});
 
 	// load all grunt tasks
@@ -57,7 +68,7 @@ module.exports = function(grunt){
 	// Default task(s).
 	grunt.registerTask('common', ['sass', 'asset_packager', 'copy:main']);
 
-	grunt.registerTask('dev', ['env:dev', 'common']);
+	grunt.registerTask('dev', ['env:dev', 'jshint', 'common']);
 	grunt.registerTask('prod', ['env:prod', 'clean', 'common']);
 
 	grunt.registerTask('default', ['dev']);
