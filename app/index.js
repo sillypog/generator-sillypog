@@ -46,7 +46,9 @@ SillypogGenerator.prototype.app = function app() {
   this.template('_bower.json', 'bower.json');
   this.template('Gruntfile.js', 'Gruntfile.js');
   this.template('_index.html', 'src/index.html');
-
+  this.template('greeting.js', 'src/js/greeting.js');
+  
+  this.copy('common.js.pkg', 'src/asset_packages/js/common.js.pkg');
   this.copy('main.scss', 'src/scss/'+_.slugify(this.siteName)+'.scss');
 };
 
@@ -56,8 +58,8 @@ SillypogGenerator.prototype.ruby = function ruby() {
   this.template('.ruby-gemset', '.ruby-gemset');
 }
 
-/*SillypogGenerator.prototype.runtime = function runtime() {
-  this.copy('bowerrc', '.bowerrc');
+SillypogGenerator.prototype.runtime = function runtime() {
+  //this.copy('bowerrc', '.bowerrc');
   this.copy('gitignore', '.gitignore');
-  this.copy('jshintrc', 'jshintrc');
-};*/
+  //this.copy('jshintrc', 'jshintrc');
+};

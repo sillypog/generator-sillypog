@@ -1,6 +1,6 @@
 {
   "name": "generator-sillypog",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "Yeoman generator for static sites. jQuery & Sass included.",
   "keywords": [
     "yeoman-generator"

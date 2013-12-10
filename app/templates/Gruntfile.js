@@ -9,12 +9,6 @@ module.exports = function(grunt){
 			dev: { NODE_ENV: 'DEVELOPMENT'},
 			prod: { NODE_ENV: 'PRODUCTION'}
 		},
-		preprocess: {
-			index: {
-				src: 'src/index.html',
-				dest: 'build/index.html'
-			}
-		},
 		sass: {
 			dist: {
 				files: { 'build/css/<%%= _.slugify(pkg.name) %>.css': 'src/scss/<%%= _.slugify(pkg.name) %>.scss'}
@@ -24,35 +18,22 @@ module.exports = function(grunt){
 		copy: {
 			main: {
 				files: [
-					{src: 'bower_components/jquery/jquery.min.js', dest: 'build/js/jquery.min.js'},
-					{cwd: 'src/assets', src:['**/*.*'], dest:'build/assets', expand:true}
-				]
-			},
-			dev: {
-				files: [
-					{ cwd: 'src/js', src: ['*.js'], dest: 'build/js', filter: 'isFile', expand:true}
+					{cwd: 'src/assets', src:['**/*.*'], dest:'build/assets', expand:true},
+					{src:'bower_components/jquery/jquery.min.js', dest:'build/jquery.min.js'}
 				]
 			}
 		},
-		concat: {
-	      js: {
-	      	options: {
-	        	separator: ';\n\n'
-	      	},
-	        src: ['src/js/*.js'],
-	        dest: 'build/js/<%%= _.slugify(pkg.name) %>.js'
-	      }
-	    },
-	    uglify: {
-	      options: {
-	        banner: '//! <%%= _.slugify(pkg.name) %> <%%= grunt.template.today("dd-mm-yyyy") %> \n'
-	      },
-	      dist: {
-	        files: {
-	          '<%%= concat.js.dest %>': ['<%%= concat.js.dest %>']
-	        }
-	      }
-	    },
+		asset_packager: {
+			options: {
+				index: 'src/index.html',
+				dest: 'build'
+			},
+			build: {
+				files: [
+					{ src: ['src/asset_packages/**/*.pkg'], expand: true }
+				]
+			}
+		},
 	    watch: {
 	    	files: ['src/**'],
 	    	tasks: ['dev']
@@ -73,10 +54,10 @@ module.exports = function(grunt){
 	require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
 	// Default task(s).
-	grunt.registerTask('common', ['preprocess', 'copy:main']);
+	grunt.registerTask('common', ['sass', 'asset_packager', 'copy:main']);
 
-	grunt.registerTask('dev', ['env:dev', 'copy:dev', 'common']);
-	grunt.registerTask('prod', ['env:prod', 'clean', 'common', 'concat', 'uglify']);
+	grunt.registerTask('dev', ['env:dev', 'common']);
+	grunt.registerTask('prod', ['env:prod', 'clean', 'common']);
 
 	grunt.registerTask('default', ['dev']);
 };
