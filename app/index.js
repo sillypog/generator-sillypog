@@ -18,7 +18,7 @@ util.inherits(SillypogGenerator, yeoman.generators.Base);
 
 SillypogGenerator.prototype.greet = function greet() {
    console.log(this.yeoman);
-}
+};
 
 SillypogGenerator.prototype.askFor = function askFor() {
   var cb = this.async();
@@ -57,7 +57,7 @@ SillypogGenerator.prototype.ruby = function ruby() {
   this.copy('Gemfile', 'Gemfile');
   this.copy('.ruby-version', '.ruby-version');
   this.template('.ruby-gemset', '.ruby-gemset');
-}
+};
 
 SillypogGenerator.prototype.runtime = function runtime() {
   this.copy('gitignore', '.gitignore');
