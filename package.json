@@ -18,7 +18,7 @@
     "url": "git://github.com/sillypog/generator-sillypog.git"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha --reporter spec"
   },
   "dependencies": {
     "yeoman-generator": "~0.13.0",
