@@ -1,7 +1,10 @@
 # generator-sillypog [![Build Status](https://secure.travis-ci.org/sillypog/generator-sillypog.png?branch=master)](https://travis-ci.org/sillypog/generator-sillypog)
 
-A generator for [Yeoman](http://yeoman.io).
+A static website site generator for [Yeoman](http://yeoman.io).
 
+* Uses grunt-asset-packager to manage javascript builds for development and production sites. All assets are copied to build folder for easy deploy.
+* Grunt configuration provides out of the box support for Sass. The generator includes Ruby environment files and a Gemfile to allow Sass installation with `bundle install`.
+* jQuery is included through Google's CDN, with a local copy as backup in case this can't be reached.
 
 ## Getting Started
 
