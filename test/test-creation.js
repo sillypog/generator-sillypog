@@ -22,12 +22,22 @@ describe('sillypog generator', function () {
   it('creates expected files', function (done) {
     var expected = [
       // add files you expect to exist here.
+	  '.gitignore',
       '.jshintrc',
-      '.editorconfig'
+	  '.ruby-gemset',
+	  '.ruby-version',
+	  'Gemfile',
+	  'Gruntfile.js',
+	  'bower.json',
+	  'src/favicon.ico',
+	  'src/index.html',
+	  ['src/asset_packages/js/common.js.pkg', /src\/js\/greeting.js/],
+	  ['src/js/greeting.js', /console\.log\('Welcome to Test Site'\);/],
+	  'src/scss/test-site.scss'
     ];
 
     helpers.mockPrompt(this.app, {
-      'someOption': true
+      'siteName': 'Test Site'
     });
     this.app.options['skip-install'] = true;
     this.app.run({}, function () {
