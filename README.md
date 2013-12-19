@@ -1,4 +1,4 @@
-# generator-sillypog [![Build Status](https://secure.travis-ci.org/sillypog/generator-sillypog.png?branch=master)](https://travis-ci.org/sillypog/generator-sillypog)
+# generator-sillypog [![Build Status](https://secure.travis-ci.org/sillypog/generator-sillypog.png?branch=master)](https://travis-ci.org/sillypog/generator-sillypog) [![Dependency Status](https://david-dm.org/sillypog/generator-sillypog.png)](https://david-dm.org/sillypog/generator-sillypog)
 
 A static website site generator for [Yeoman](http://yeoman.io).
 
